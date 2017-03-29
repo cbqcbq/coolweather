@@ -30,16 +30,16 @@ public class AutoUpdateService extends Service {
 			}
 		}).start();
 		AlarmManager manager = (AlarmManager) getSystemService(ALARM_SERVICE);
-		int anHour = 8 * 60 * 60 * 1000;// 这是8小时的毫秒数
+		int anHour = 8 * 60 * 60 * 1000;// 杩欐槸8灏忔椂鐨勬绉掓暟
 		long triggerAtTime = SystemClock.elapsedRealtime() + anHour;
-		Intent i = new Intent(this, AutoUpdateService.class);
+		Intent i = new Intent(this, AutoUpdateReceiver.class);
 		PendingIntent pi = PendingIntent.getBroadcast(this, 0, i, 0);
 		manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAtTime, pi);
 		return super.onStartCommand(intent, flags, startId);
 	}
 
 	/**
-	 * 更新天气信息
+	 * 鏇存柊澶╂皵淇℃伅
 	 */
 	protected void updateWeather() {
 		SharedPreferences prefs = PreferenceManager
